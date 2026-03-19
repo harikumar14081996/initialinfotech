@@ -1,81 +1,54 @@
-import { redirect } from "next/navigation";
+import { getCompanyInfo, getServices, getEmployees, getContactInquiries } from "@/lib/data";
 
-import { AdminDashboard } from "@/components/admin-dashboard";
-import { getSession } from "@/lib/auth";
-import { getCompanyInfo, getContactInquiries, getEmployees, getServices } from "@/lib/data";
-import { prisma } from "@/lib/prisma";
+export const metadata = { title: "Admin Overview" };
 
-export const metadata = { title: "Admin" };
-
-export default async function AdminPage() {
-  const session = await getSession();
-  if (!session) redirect("/admin/login");
-
-  const [company, services, employees, inquiries] = await Promise.all([
-    getCompanyInfo(),
+export default async function AdminOverviewPage() {
+  const [services, employees, inquiries] = await Promise.all([
     getServices(),
     getEmployees(),
     getContactInquiries(),
   ]);
 
-  // Load users for admin user management (admin only)
-  let users: { id: string; email: string; role: string; createdAt: string }[] = [];
-  if (session.role === "admin" && process.env.DATABASE_URL) {
-    const rows = await prisma.adminUser.findMany({
-      select: { id: true, email: true, role: true, createdAt: true },
-      orderBy: { createdAt: "asc" },
-    });
-    users = rows.map((r) => ({ ...r, createdAt: r.createdAt.toISOString() }));
-  }
+  const activeEmployees = employees.filter((e) => e.isActive).length;
 
   return (
-    <div className="page-shell py-14">
-      <AdminDashboard
-        role={session.role}
-        email={session.email}
-        users={users}
-        company={{
-          companyName: company.companyName,
-          tagline: company.tagline,
-          address: company.address,
-          city: company.city,
-          region: company.region,
-          postalCode: company.postalCode,
-          country: company.country,
-          ownerName: company.ownerName,
-          ownerTitle: company.ownerTitle,
-          aboutTitle: company.aboutTitle,
-          aboutBody: company.aboutBody,
-          mission: company.mission,
-          globalReach: company.globalReach,
-          contactEmail: company.contactEmail,
-          contactPhone: company.contactPhone,
-          googleMapsEmbedUrl: company.googleMapsEmbedUrl,
-        }}
-        services={services}
-        employees={employees.map((employee) => ({
-          id: employee.id,
-          name: employee.name,
-          designation: employee.designation || "",
-          photoUrl: employee.photoUrl || "",
-          dob: employee.dob.toISOString().slice(0, 10),
-          personalEmail: employee.personalEmail,
-          phone: employee.phone || "",
-          startDate: employee.startDate.toISOString().slice(0, 10),
-          endDate: employee.endDate ? employee.endDate.toISOString().slice(0, 10) : "",
-          dutiesHtml: employee.dutiesHtml,
-          isActive: employee.isActive,
-        }))}
-        inquiries={inquiries.map((inquiry) => ({
-          id: inquiry.id,
-          name: inquiry.name,
-          email: inquiry.email,
-          phone: inquiry.phone,
-          company: inquiry.company,
-          message: inquiry.message,
-          createdAt: inquiry.createdAt.toISOString(),
-        }))}
-      />
+    <div className="space-y-8">
+      <div>
+        <h1 className="font-mono text-3xl font-semibold text-[var(--color-text)]">Admin Dashboard</h1>
+        <p className="mt-2 text-[var(--color-muted)]">Welcome back. Here's what's happening today.</p>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="section-card rounded-[2rem] p-6">
+          <p className="text-sm font-medium text-[var(--color-muted)]">Active Employees</p>
+          <p className="mt-2 font-mono text-4xl font-semibold text-[var(--color-text)]">
+            {activeEmployees}
+          </p>
+          <p className="mt-1 text-sm text-[var(--color-muted)]">
+            Out of {employees.length} total profiles
+          </p>
+        </div>
+
+        <div className="section-card rounded-[2rem] p-6">
+          <p className="text-sm font-medium text-[var(--color-muted)]">Total Services</p>
+          <p className="mt-2 font-mono text-4xl font-semibold text-[var(--color-text)]">
+            {services.length}
+          </p>
+          <p className="mt-1 text-sm text-[var(--color-muted)]">
+            Active public offerings
+          </p>
+        </div>
+
+        <div className="section-card rounded-[2rem] p-6">
+          <p className="text-sm font-medium text-[var(--color-muted)]">Contact Inquiries</p>
+          <p className="mt-2 font-mono text-4xl font-semibold text-[var(--color-text)]">
+            {inquiries.length}
+          </p>
+          <p className="mt-1 text-sm text-[var(--color-muted)]">
+            Total submissions received
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
