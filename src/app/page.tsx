@@ -1,65 +1,132 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
-export default function Home() {
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { getCompanyInfo, getEmployees, getServices } from "@/lib/data";
+import { iconMap, techStack } from "@/lib/constants";
+
+export default async function HomePage() {
+  const [company, services, employees] = await Promise.all([
+    getCompanyInfo(),
+    getServices(),
+    getEmployees(),
+  ]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="pb-20">
+      <section className="page-shell grid gap-10 py-14 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
+        <div>
+          <Badge>Tech-forward digital delivery</Badge>
+          <div className="hero-accent-line mt-6" />
+          <h1 className="mt-6 max-w-3xl font-mono text-5xl leading-tight font-semibold tracking-tight text-[var(--color-text)] md:text-7xl">
+            Build software, mobile apps, and AI workflows that actually move the business.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--color-muted)]">
+            {company.tagline} We help teams ship customer-facing products, internal systems, and
+            intelligent automation from strategy through launch.
           </p>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link href="/contact">
+              <Button>
+                Start a project
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+            <Link href="/registry">
+              <Button variant="secondary">View employee directory</Button>
+            </Link>
+          </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            {[
+              "Custom web platforms",
+              "Mobile product delivery",
+              "AI-powered operations",
+            ].map((item) => (
+              <div key={item} className="rounded-3xl border border-[var(--color-line)] bg-white p-4 shadow-[0_8px_18px_rgba(19,155,229,0.04)]">
+                <CheckCircle2 className="h-5 w-5 text-[var(--color-accent)]" />
+                <p className="mt-3 text-sm text-[var(--color-text)]">{item}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="hero-panel relative overflow-hidden rounded-[2rem] p-6 shadow-[0_12px_28px_rgba(19,155,229,0.06)]">
+          <div className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(90deg,var(--color-accent),var(--color-secondary))]" />
+          <div className="relative space-y-5">
+            <div className="rounded-[1.75rem] border border-[var(--color-line)] bg-white p-5">
+              <p className="text-sm uppercase tracking-[0.2em] text-[var(--color-secondary)]/80">
+                Delivery profile
+              </p>
+              <p className="mt-4 font-mono text-3xl font-semibold text-[var(--color-text)]">Bardoli to global teams</p>
+              <p className="mt-3 text-sm leading-7 text-[var(--color-muted)]">
+                Product engineering, architecture, QA, and launch support with a practical
+                business lens.
+              </p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="rounded-[1.5rem] border border-[var(--color-line)] bg-white p-5">
+                <p className="text-3xl font-semibold text-[var(--color-accent)]">{services.length}+</p>
+                <p className="mt-2 text-sm text-[var(--color-muted)]">Core service tracks</p>
+              </div>
+              <div className="rounded-[1.5rem] border border-[var(--color-line)] bg-white p-5">
+                <p className="text-3xl font-semibold text-[var(--color-accent)]">{employees.length}+</p>
+                <p className="mt-2 text-sm text-[var(--color-muted)]">Visible employee records</p>
+              </div>
+            </div>
+            <div className="rounded-[1.75rem] border border-[var(--color-line)] bg-white p-5">
+              <p className="text-sm font-medium text-[var(--color-secondary)]">Focused on clarity</p>
+              <p className="mt-2 text-sm leading-7 text-[var(--color-muted)]">
+                We combine clean implementation, practical architecture, and transparent
+                communication so stakeholders always know where the work stands.
+              </p>
+            </div>
+          </div>
         </div>
-      </main>
+      </section>
+
+      <section className="page-shell py-8">
+        <div className="flex items-end justify-between gap-6">
+          <div>
+            <Badge>Services</Badge>
+            <h2 className="mt-4 font-mono text-3xl font-semibold text-[var(--color-text)] md:text-4xl">
+              Capability areas built for business outcomes
+            </h2>
+          </div>
+        </div>
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          {services.map((service) => {
+            const Icon = iconMap[service.iconName as keyof typeof iconMap] ?? iconMap["globe-2"];
+            return (
+              <div key={service.id} className="section-card rounded-[1.8rem] p-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--color-line)] bg-white">
+                  <Icon className="h-5 w-5 text-[var(--color-accent)]" />
+                </div>
+                <h3 className="mt-6 font-mono text-2xl font-semibold text-[var(--color-text)]">{service.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-[var(--color-muted)]">
+                  {service.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="page-shell py-8">
+        <div className="section-card overflow-hidden rounded-[2rem] p-6 md:p-8">
+          <Badge>Tech stack</Badge>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {techStack.map((item) => (
+              <div
+                key={item}
+                className="rounded-[1.4rem] border border-[var(--color-line)] bg-white px-4 py-5 text-sm font-medium text-[var(--color-text)]"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
