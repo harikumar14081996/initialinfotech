@@ -86,6 +86,30 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* University Hiring Section */}
+      <section className="page-shell py-8 md:py-12">
+        <div className="section-card flex flex-col items-center justify-between gap-8 rounded-[2rem] p-8 md:flex-row md:p-10">
+          <div className="max-w-xl">
+            <Badge>Campus Placements</Badge>
+            <h2 className="mt-4 font-mono text-3xl font-semibold text-[var(--color-text)] md:text-4xl">
+              Proudly hiring from Uka Tarsadia University
+            </h2>
+            <p className="mt-4 leading-7 text-[var(--color-muted)]">
+              We actively collaborate with UTU to bring top-tier engineering talent directly into our teams. Our campus placement initiatives ensure that fresh perspectives and cutting-edge academic knowledge are continuously integrated into our software delivery pipeline.
+            </p>
+          </div>
+          <div className="flex w-full max-w-[280px] shrink-0 items-center justify-center rounded-[1.5rem] border border-[var(--color-line)] bg-white p-8 shadow-sm md:w-auto">
+            <Image
+              src="/utu-logo.png"
+              alt="Uka Tarsadia University Logo"
+              width={180}
+              height={180}
+              className="object-contain drop-shadow-sm"
+            />
+          </div>
+        </div>
+      </section>
+
       <section className="page-shell py-8">
         <div className="flex items-end justify-between gap-6">
           <div>
