@@ -7,31 +7,41 @@ async function main() {
   await prisma.companyInfo.upsert({
     where: { id: "primary" },
     update: {
-      ownerName: "Shirish Patel",
-      ownerTitle: "Founder & Director",
-    },
-    create: {
-      id: "primary",
       companyName: "Initial Infotech",
-      tagline: "Custom software and mobile app development for ambitious businesses.",
-      address: "Suthar Faliya Road, J P Nagar",
+      tagline: "Custom Software & ERP Development Specialists",
+      address: "Suthar Faliya Road, J P Nagar, Near J.M. Patel High School",
       city: "Bardoli",
       region: "Gujarat",
       postalCode: "394601",
       country: "India",
       ownerName: "Shirish Patel",
       ownerTitle: "Founder & Director",
-      aboutTitle: "Built in Bardoli, delivered globally.",
-      aboutBody:
-        "Initial Infotech partners with startups, SMEs, and enterprise teams to design, build, and scale digital products with clarity and technical depth.",
-      mission:
-        "Our mission is to turn complex business problems into reliable digital products with thoughtful engineering and practical execution.",
-      globalReach:
-        "From Bardoli to global clients, we blend local accountability with modern product delivery standards.",
+      contactPhone: "+91 (Contact Number)",
       contactEmail: "hello@initialinfotech.com",
-      contactPhone: "+91 97200 00000",
-      googleMapsEmbedUrl:
-        "https://www.google.com/maps?q=Suthar%20Faliya%20Road%2C%20J%20P%20Nagar%2C%20Bardoli%2C%20Gujarat%20394601%2C%20India&output=embed",
+      aboutTitle: "Leading Software Development in Bardoli",
+      aboutBody: "Initial Infotech is a premier software developer in Bardoli specializing in computer software development, ERP systems, and application delivery services. We pride ourselves on creating reliable software solutions tailored to regional and international business needs.",
+      mission: "To deliver high-quality, scalable ERP solutions and bespoke software applications that empower businesses to thrive in the digital age.",
+      globalReach: "Based in Bardoli, our impact spans globally. We have consistently provided technical excellence to partners looking for robust software and ERP implementations.",
+      googleMapsEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3722.5186445580875!2d73.1165217!3d21.1219602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be05b7662b66d73%3A0xe7a505b2203ddbcf!2sInitial%20Infotech!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus",
+    },
+    create: {
+      id: "primary",
+      companyName: "Initial Infotech",
+      tagline: "Custom Software & ERP Development Specialists",
+      address: "Suthar Faliya Road, J P Nagar, Near J.M. Patel High School",
+      city: "Bardoli",
+      region: "Gujarat",
+      postalCode: "394601",
+      country: "India",
+      ownerName: "Shirish Patel",
+      ownerTitle: "Founder & Director",
+      contactPhone: "+91 (Contact Number)",
+      contactEmail: "hello@initialinfotech.com",
+      aboutTitle: "Leading Software Development in Bardoli",
+      aboutBody: "Initial Infotech is a premier software developer in Bardoli specializing in computer software development, ERP systems, and application delivery services. We pride ourselves on creating reliable software solutions tailored to regional and international business needs.",
+      mission: "To deliver high-quality, scalable ERP solutions and bespoke software applications that empower businesses to thrive in the digital age.",
+      globalReach: "Based in Bardoli, our impact spans globally. We have consistently provided technical excellence to partners looking for robust software and ERP implementations.",
+      googleMapsEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3722.5186445580875!2d73.1165217!3d21.1219602!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be05b7662b66d73%3A0xe7a505b2203ddbcf!2sInitial%20Infotech!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus",
     },
   });
 

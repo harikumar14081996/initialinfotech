@@ -91,17 +91,28 @@ export async function Footer() {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Legal links */}
           <div>
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--color-text)]">
-              Services
+              Legal
             </h3>
             <ul className="space-y-2">
-              {services.map((svc) => (
-                <li key={svc} className="text-sm text-[var(--color-muted)]">
-                  {svc}
-                </li>
-              ))}
+              <li>
+                <Link
+                  href="/privacy-policy"
+                  className="text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--color-accent)]"
+                >
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/terms"
+                  className="text-sm text-[var(--color-muted)] transition-colors hover:text-[var(--color-accent)]"
+                >
+                  Terms & Conditions
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
