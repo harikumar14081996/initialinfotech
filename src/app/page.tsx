@@ -92,20 +92,31 @@ export default async function HomePage() {
           <div className="max-w-xl">
             <Badge>Campus Placements</Badge>
             <h2 className="mt-4 font-mono text-3xl font-semibold text-[var(--color-text)] md:text-4xl">
-              Proudly hiring from Uka Tarsadia University
+              Proudly hiring from top regional universities
             </h2>
             <p className="mt-4 leading-7 text-[var(--color-muted)]">
-              We actively recruit candidates from UTU to bring top-tier engineering talent directly into our teams. Our campus placement initiatives ensure that fresh perspectives and cutting-edge academic knowledge are continuously integrated into our software delivery pipeline.
+              We actively recruit candidates from Uka Tarsadia University and Vidyabharti Trust Institutions to bring top-tier engineering talent directly into our teams. Our campus placement initiatives ensure that fresh perspectives and cutting-edge academic knowledge are continuously integrated into our software delivery pipeline.
             </p>
           </div>
-          <div className="flex w-full max-w-[280px] shrink-0 items-center justify-center rounded-[1.5rem] border border-[var(--color-line)] bg-white p-8 shadow-sm md:w-auto">
-            <Image
-              src="/utu-logo.jpg"
-              alt="Uka Tarsadia University Logo"
-              width={180}
-              height={180}
-              className="object-contain drop-shadow-sm"
-            />
+          <div className="grid w-full shrink-0 grid-cols-2 gap-4 sm:max-w-md md:w-auto">
+            <div className="flex items-center justify-center rounded-[1.5rem] border border-[var(--color-line)] bg-white p-6 shadow-sm aspect-square w-full sm:w-40 xl:w-48">
+              <Image
+                src="/utu-logo.jpg"
+                alt="Uka Tarsadia University Logo"
+                width={120}
+                height={120}
+                className="object-contain drop-shadow-sm"
+              />
+            </div>
+            <div className="flex items-center justify-center rounded-[1.5rem] border border-[var(--color-line)] bg-white p-6 shadow-sm aspect-square w-full sm:w-40 xl:w-48">
+              <Image
+                src="/vidyabharti-logo.png"
+                alt="Vidyabharti Trust Logo"
+                width={120}
+                height={120}
+                className="object-contain drop-shadow-sm"
+              />
+            </div>
           </div>
         </div>
       </section>
