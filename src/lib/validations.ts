@@ -29,15 +29,15 @@ export const serviceSchema = z.object({
 
 export const employeeSchema = z.object({
   id: z.string().optional(),
-  name: z.string().min(3),
+  name: z.string().min(3, "Name must be at least 3 characters long"),
   designation: z.string().optional(),
   photoUrl: z.url().optional().or(z.literal("")),
-  dob: z.string().min(1),
-  personalEmail: z.email(),
+  dob: z.string().min(1, "Date of birth is required"),
+  personalEmail: z.string().email("Valid email address is required"),
   phone: z.string().optional(),
-  startDate: z.string().min(1),
+  startDate: z.string().min(1, "Start date is required"),
   endDate: z.string().optional(),
-  dutiesHtml: z.string().min(20),
+  dutiesHtml: z.string().optional().default(""),
   isActive: z.coerce.boolean(),
 });
 
