@@ -95,6 +95,15 @@ export const techStack = [
   "Mobile Apps",
   "AI Workflows",
   "Cloud Deployments",
+  "ASP.NET",
+  "C#",
+  "VB.NET",
+  ".NET Framework",
+  ".NET Core",
+  "MSSQL",
+  "Software Development",
+  "Web Design",
+  "UI/UX",
 ];
 
 export const iconMap = {
