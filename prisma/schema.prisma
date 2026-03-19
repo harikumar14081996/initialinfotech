@@ -24,6 +24,7 @@ model Employee {
   id            String   @id @default(cuid())
   name          String
   slug          String   @unique
+  designation   String?
   photoUrl      String?
   dob           DateTime
   personalEmail String

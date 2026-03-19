@@ -30,6 +30,7 @@ export const serviceSchema = z.object({
 export const employeeSchema = z.object({
   id: z.string().optional(),
   name: z.string().min(3),
+  designation: z.string().optional(),
   photoUrl: z.url().optional().or(z.literal("")),
   dob: z.string().min(1),
   personalEmail: z.email(),

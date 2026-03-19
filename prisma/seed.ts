@@ -71,6 +71,7 @@ async function main() {
     {
       name: "Aarav Desai",
       slug: "aarav-desai",
+      designation: "Lead Technical Architect",
       photoUrl: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
       dob: new Date("1996-06-18"),
       personalEmail: "aarav.desai@example.com",
@@ -83,6 +84,7 @@ async function main() {
     {
       name: "Mira Patel",
       slug: "mira-patel",
+      designation: "UI/UX Developer",
       photoUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
       dob: new Date("1998-11-02"),
       personalEmail: "mira.patel@example.com",

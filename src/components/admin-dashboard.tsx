@@ -39,6 +39,7 @@ type ServicePayload = {
 type EmployeePayload = {
   id?: string;
   name: string;
+  designation: string;
   photoUrl: string;
   dob: string;
   personalEmail: string;
@@ -94,6 +95,7 @@ export function AdminDashboard({
   });
   const [employeeForm, setEmployeeForm] = useState<EmployeePayload>({
     name: "",
+    designation: "",
     photoUrl: "",
     dob: "",
     personalEmail: "",
@@ -421,6 +423,11 @@ export function AdminDashboard({
               onChange={(event) => setEmployeeForm({ ...employeeForm, name: event.target.value })}
             />
             <Input
+              placeholder="Designation (e.g. Senior Developer)"
+              value={employeeForm.designation}
+              onChange={(event) => setEmployeeForm({ ...employeeForm, designation: event.target.value })}
+            />
+            <Input
               placeholder="Photo URL"
               value={employeeForm.photoUrl}
               onChange={(event) =>
@@ -497,6 +504,7 @@ export function AdminDashboard({
               onClick={() =>
                 setEmployeeForm({
                   name: "",
+                  designation: "",
                   photoUrl: "",
                   dob: "",
                   personalEmail: "",

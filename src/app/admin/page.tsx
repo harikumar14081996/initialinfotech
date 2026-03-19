@@ -56,6 +56,7 @@ export default async function AdminPage() {
         employees={employees.map((employee) => ({
           id: employee.id,
           name: employee.name,
+          designation: employee.designation || "",
           photoUrl: employee.photoUrl || "",
           dob: employee.dob.toISOString().slice(0, 10),
           personalEmail: employee.personalEmail,

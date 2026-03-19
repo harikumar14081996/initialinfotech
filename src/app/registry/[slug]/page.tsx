@@ -45,6 +45,9 @@ export default async function EmployeeProfilePage({
           <div>
             <Badge>{employee.isActive ? "Currently Working" : "Former Employee"}</Badge>
             <h1 className="mt-4 font-mono text-4xl font-semibold text-[var(--color-text)]">{employee.name}</h1>
+            {employee.designation && (
+              <p className="mt-1 text-base font-medium text-[var(--color-accent)]">{employee.designation}</p>
+            )}
             <div className="mt-5 grid gap-3 text-sm text-[var(--color-muted)] md:grid-cols-2">
               <p>Date of Birth: {format(employee.dob, "dd MMM yyyy")}</p>
               <p>Personal Email: {employee.personalEmail}</p>
