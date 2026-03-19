@@ -101,7 +101,7 @@ export default async function HomePage() {
           <div className="grid w-full shrink-0 grid-cols-2 gap-4 sm:max-w-md md:w-auto">
             <div className="flex items-center justify-center rounded-[1.5rem] border border-[var(--color-line)] bg-white p-3 shadow-sm aspect-square w-full sm:w-40 xl:w-48 overflow-hidden">
               <Image
-                src="/utu-logo.jpg"
+                src="/utu-logo.png"
                 alt="Uka Tarsadia University Logo"
                 width={160}
                 height={160}
