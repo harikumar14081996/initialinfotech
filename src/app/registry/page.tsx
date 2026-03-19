@@ -61,10 +61,11 @@ export default async function RegistryPage({
         <div className="mt-4 rounded-2xl border border-[var(--color-line)] bg-[var(--color-paper)] px-5 py-4">
           <p className="font-medium text-[var(--color-text)]">About our compensation structure</p>
           <p className="mt-1 text-[var(--color-muted)]">
-            Initial Infotech is a boutique technology firm. As a small, closely-held business, we
-            manage compensation through a flexible arrangement — salaries and payments are typically
-            settled directly and may be processed outside of formal payroll systems. Verification
-            reviewers should account for this when assessing employment and income history.
+            Initial Infotech is a small, closely-held technology firm. Employee salaries are paid
+            directly in cash as our primary mode of compensation. Payments are settled on an
+            agreed schedule and are not processed through a formal payroll system. Employers,
+            banks, visa officers, and other verification reviewers should take this into account
+            when assessing employment and income history for our team members.
           </p>
         </div>
       </div>
