@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, User } from "lucide-react";
+import { getCompanyInfo } from "@/lib/data";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -16,7 +17,9 @@ const services = [
   "IT Consulting",
 ];
 
-export function Footer() {
+export async function Footer() {
+  const company = await getCompanyInfo();
+
   return (
     <footer className="border-t border-[var(--color-line)] bg-white">
       <div className="page-shell py-12">
@@ -37,22 +40,33 @@ export function Footer() {
               for teams that need dependable execution and clear communication.
             </p>
 
+            {/* Owner */}
+            {company.ownerName && (
+              <div className="mt-4 flex items-center gap-2 text-sm text-[var(--color-text)]">
+                <User className="h-4 w-4 shrink-0 text-[var(--color-accent)]" />
+                <span className="font-medium">{company.ownerName}</span>
+                {company.ownerTitle && (
+                  <span className="text-[var(--color-muted)]">· {company.ownerTitle}</span>
+                )}
+              </div>
+            )}
+
             {/* Contact info */}
-            <ul className="mt-5 space-y-2 text-sm text-[var(--color-muted)]">
+            <ul className="mt-4 space-y-2 text-sm text-[var(--color-muted)]">
               <li className="flex items-center gap-2">
                 <MapPin className="h-4 w-4 shrink-0 text-[var(--color-accent)]" />
                 Bardoli, Gujarat, India
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4 shrink-0 text-[var(--color-accent)]" />
-                <a href="tel:+919054540000" className="hover:text-[var(--color-accent)] transition-colors">
-                  +91 90545 40000
+                <a href={`tel:${company.contactPhone}`} className="hover:text-[var(--color-accent)] transition-colors">
+                  {company.contactPhone}
                 </a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4 shrink-0 text-[var(--color-accent)]" />
-                <a href="mailto:info@initialinfotech.com" className="hover:text-[var(--color-accent)] transition-colors">
-                  info@initialinfotech.com
+                <a href={`mailto:${company.contactEmail}`} className="hover:text-[var(--color-accent)] transition-colors">
+                  {company.contactEmail}
                 </a>
               </li>
             </ul>

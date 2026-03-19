@@ -9,6 +9,8 @@ export const companyDefaults = {
   region: "Gujarat",
   postalCode: "394601",
   country: "India",
+  ownerName: "Shirish Patel",
+  ownerTitle: "Founder & Director",
   aboutTitle: "Built in Bardoli, delivered globally.",
   aboutBody:
     "Initial Infotech is a software and app development agency focused on modern product engineering, business workflows, and digital transformation. We partner with clients that need reliable execution, transparent communication, and technology that creates measurable operational value.",

@@ -8,6 +8,8 @@ export const companyInfoSchema = z.object({
   region: z.string().min(2),
   postalCode: z.string().min(3),
   country: z.string().min(2),
+  ownerName: z.string().min(2),
+  ownerTitle: z.string().min(2),
   aboutTitle: z.string().min(5),
   aboutBody: z.string().min(20),
   mission: z.string().min(20),

@@ -1,4 +1,4 @@
-import { Globe2, MapPin, Sparkles } from "lucide-react";
+import { Globe2, MapPin, Sparkles, User } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { getCompanyInfo } from "@/lib/data";
@@ -32,6 +32,18 @@ export default async function AboutPage() {
                 {company.globalReach}
               </p>
             </div>
+            {company.ownerName && (
+              <div className="rounded-[1.5rem] border border-[var(--color-line)] bg-white p-5 md:col-span-2">
+                <User className="h-5 w-5 text-[var(--color-accent)]" />
+                <h2 className="mt-4 font-mono text-xl font-semibold">Leadership</h2>
+                <p className="mt-3 text-sm font-medium text-[var(--color-text)]">
+                  {company.ownerName}
+                </p>
+                {company.ownerTitle && (
+                  <p className="text-sm text-[var(--color-muted)]">{company.ownerTitle}</p>
+                )}
+              </div>
+            )}
           </div>
         </div>
 

@@ -17,6 +17,8 @@ type CompanyPayload = {
   region: string;
   postalCode: string;
   country: string;
+  ownerName: string;
+  ownerTitle: string;
   aboutTitle: string;
   aboutBody: string;
   mission: string;
@@ -57,6 +59,13 @@ type InquiryPayload = {
   createdAt: string;
 };
 
+type UserPayload = {
+  id: string;
+  email: string;
+  role: string;
+  createdAt: string;
+};
+
 export function AdminDashboard({
   company,
   services,
@@ -64,6 +73,7 @@ export function AdminDashboard({
   inquiries,
   role,
   email,
+  users,
 }: {
   company: CompanyPayload;
   services: ServicePayload[];
@@ -71,8 +81,11 @@ export function AdminDashboard({
   inquiries: InquiryPayload[];
   role: "admin" | "editor";
   email: string;
+  users: UserPayload[];
 }) {
   const [companyForm, setCompanyForm] = useState(company);
+  const [pwForm, setPwForm] = useState({ currentPassword: "", newPassword: "", confirmPassword: "" });
+  const [userForm, setUserForm] = useState({ email: "", password: "", role: "editor" });
   const [serviceForm, setServiceForm] = useState<ServicePayload>({
     title: "",
     description: "",
@@ -181,6 +194,16 @@ export function AdminDashboard({
                 placeholder="Country"
                 value={companyForm.country}
                 onChange={(event) => setCompanyForm({ ...companyForm, country: event.target.value })}
+              />
+              <Input
+                placeholder="Owner name"
+                value={companyForm.ownerName}
+                onChange={(event) => setCompanyForm({ ...companyForm, ownerName: event.target.value })}
+              />
+              <Input
+                placeholder="Owner title (e.g. Founder & Director)"
+                value={companyForm.ownerTitle}
+                onChange={(event) => setCompanyForm({ ...companyForm, ownerTitle: event.target.value })}
               />
               <Input
                 placeholder="Contact email"
@@ -512,6 +535,117 @@ export function AdminDashboard({
           )}
         </div>
       </section>
+
+      {/* ── Change Password ─────────────────────────────────────────────── */}
+      <section className="section-card rounded-[2rem] p-6">
+        <h2 className="font-mono text-2xl font-semibold">Change Password</h2>
+        <p className="mt-1 text-sm text-[var(--color-muted)]">Update your own account password.</p>
+        <div className="mt-5 grid gap-4 md:grid-cols-3">
+          <Input
+            type="password"
+            placeholder="Current password"
+            value={pwForm.currentPassword}
+            onChange={(e) => setPwForm({ ...pwForm, currentPassword: e.target.value })}
+          />
+          <Input
+            type="password"
+            placeholder="New password (min 8 chars)"
+            value={pwForm.newPassword}
+            onChange={(e) => setPwForm({ ...pwForm, newPassword: e.target.value })}
+          />
+          <Input
+            type="password"
+            placeholder="Confirm new password"
+            value={pwForm.confirmPassword}
+            onChange={(e) => setPwForm({ ...pwForm, confirmPassword: e.target.value })}
+          />
+        </div>
+        <Button
+          className="mt-4"
+          disabled={busy !== null}
+          onClick={async () => {
+            if (pwForm.newPassword !== pwForm.confirmPassword) {
+              toast.error("New passwords do not match.");
+              return;
+            }
+            await request("/api/admin/change-password", "POST", {
+              currentPassword: pwForm.currentPassword,
+              newPassword: pwForm.newPassword,
+            });
+            setPwForm({ currentPassword: "", newPassword: "", confirmPassword: "" });
+          }}
+        >
+          Update password
+        </Button>
+      </section>
+
+      {/* ── User Management (admin only) ────────────────────────────────── */}
+      {canManageEverything && (
+        <section className="section-card rounded-[2rem] p-6">
+          <h2 className="font-mono text-2xl font-semibold">User Management</h2>
+          <p className="mt-1 text-sm text-[var(--color-muted)]">
+            Manage admin and editor accounts.
+          </p>
+
+          {/* Existing users */}
+          <div className="mt-5 space-y-3">
+            {users.map((u) => (
+              <div key={u.id} className="flex items-center justify-between rounded-2xl border border-[var(--color-line)] bg-white px-4 py-3">
+                <div>
+                  <p className="text-sm font-medium text-[var(--color-text)]">{u.email}</p>
+                  <p className="text-xs text-[var(--color-muted)] capitalize">{u.role}</p>
+                </div>
+                {u.email !== email && (
+                  <Button
+                    variant="danger"
+                    disabled={busy !== null}
+                    onClick={() => request("/api/admin/users", "DELETE", { id: u.id })}
+                  >
+                    Remove
+                  </Button>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Add new user */}
+          <div className="mt-6 rounded-[1.75rem] border border-[var(--color-line)] bg-[var(--color-paper)] p-5">
+            <p className="font-medium text-[var(--color-text)]">Add new user</p>
+            <div className="mt-4 grid gap-3 md:grid-cols-3">
+              <Input
+                type="email"
+                placeholder="Email"
+                value={userForm.email}
+                onChange={(e) => setUserForm({ ...userForm, email: e.target.value })}
+              />
+              <Input
+                type="password"
+                placeholder="Password"
+                value={userForm.password}
+                onChange={(e) => setUserForm({ ...userForm, password: e.target.value })}
+              />
+              <select
+                className="h-12 rounded-2xl border border-[var(--color-line)] bg-white px-4 text-sm text-[var(--color-text)] outline-none"
+                value={userForm.role}
+                onChange={(e) => setUserForm({ ...userForm, role: e.target.value })}
+              >
+                <option value="editor">Editor</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+            <Button
+              className="mt-4"
+              disabled={busy !== null}
+              onClick={() => {
+                request("/api/admin/users", "POST", userForm);
+                setUserForm({ email: "", password: "", role: "editor" });
+              }}
+            >
+              Create user
+            </Button>
+          </div>
+        </section>
+      )}
     </div>
   );
 }
