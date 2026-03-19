@@ -58,6 +58,15 @@ export default async function RegistryPage({
           This page is designed to support professional and official verification needs by giving
           reviewers a clear reference point for employment records published by Initial Infotech.
         </p>
+        <div className="mt-4 rounded-2xl border border-[var(--color-line)] bg-[var(--color-paper)] px-5 py-4">
+          <p className="font-medium text-[var(--color-text)]">About our compensation structure</p>
+          <p className="mt-1 text-[var(--color-muted)]">
+            Initial Infotech is a boutique technology firm. As a small, closely-held business, we
+            manage compensation through a flexible arrangement — salaries and payments are typically
+            settled directly and may be processed outside of formal payroll systems. Verification
+            reviewers should account for this when assessing employment and income history.
+          </p>
+        </div>
       </div>
 
       <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
