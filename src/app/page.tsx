@@ -99,22 +99,22 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="grid w-full shrink-0 grid-cols-2 gap-4 sm:max-w-md md:w-auto">
-            <div className="flex items-center justify-center rounded-[1.5rem] border border-[var(--color-line)] bg-white p-6 shadow-sm aspect-square w-full sm:w-40 xl:w-48">
+            <div className="flex items-center justify-center rounded-[1.5rem] border border-[var(--color-line)] bg-white p-3 shadow-sm aspect-square w-full sm:w-40 xl:w-48 overflow-hidden">
               <Image
                 src="/utu-logo.jpg"
                 alt="Uka Tarsadia University Logo"
-                width={120}
-                height={120}
-                className="object-contain drop-shadow-sm"
+                width={160}
+                height={160}
+                className="h-full w-full object-contain drop-shadow-sm"
               />
             </div>
-            <div className="flex items-center justify-center rounded-[1.5rem] border border-[var(--color-line)] bg-white p-6 shadow-sm aspect-square w-full sm:w-40 xl:w-48">
+            <div className="flex items-center justify-center rounded-[1.5rem] border border-[var(--color-line)] bg-white p-3 shadow-sm aspect-square w-full sm:w-40 xl:w-48 overflow-hidden">
               <Image
                 src="/vidyabharti-logo.png"
                 alt="Vidyabharti Trust Logo"
-                width={120}
-                height={120}
-                className="object-contain drop-shadow-sm"
+                width={160}
+                height={160}
+                className="h-full w-full object-contain drop-shadow-sm"
               />
             </div>
           </div>
