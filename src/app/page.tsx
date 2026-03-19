@@ -1,10 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getCompanyInfo, getEmployees, getServices } from "@/lib/data";
-import { iconMap, techStack } from "@/lib/constants";
+import { iconMap, serviceImageMap, techStack } from "@/lib/constants";
 
 export default async function HomePage() {
   const [company, services, employees] = await Promise.all([
@@ -97,15 +98,30 @@ export default async function HomePage() {
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           {services.map((service) => {
             const Icon = iconMap[service.iconName as keyof typeof iconMap] ?? iconMap["globe-2"];
+            const imgSrc = serviceImageMap[service.iconName] ?? "/services/software-dev.png";
             return (
-              <div key={service.id} className="section-card rounded-[1.8rem] p-6">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--color-line)] bg-white">
-                  <Icon className="h-5 w-5 text-[var(--color-accent)]" />
+              <div key={service.id} className="section-card flex flex-col overflow-hidden rounded-[1.8rem]">
+                {/* Service illustration */}
+                <div className="relative h-48 w-full overflow-hidden bg-[var(--color-paper)]">
+                  <Image
+                    src={imgSrc}
+                    alt={service.title}
+                    fill
+                    className="object-cover object-center transition-transform duration-500 hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                  {/* Icon badge over image */}
+                  <div className="absolute bottom-3 left-3 flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--color-line)] bg-white shadow-sm">
+                    <Icon className="h-5 w-5 text-[var(--color-accent)]" />
+                  </div>
                 </div>
-                <h3 className="mt-6 font-mono text-2xl font-semibold text-[var(--color-text)]">{service.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-[var(--color-muted)]">
-                  {service.description}
-                </p>
+                {/* Content */}
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="font-mono text-xl font-semibold text-[var(--color-text)]">{service.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-[var(--color-muted)]">
+                    {service.description}
+                  </p>
+                </div>
               </div>
             );
           })}

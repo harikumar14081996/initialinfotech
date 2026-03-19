@@ -104,3 +104,11 @@ export const iconMap = {
   "globe-2": Globe2,
   smartphone: Smartphone,
 };
+
+export const serviceImageMap: Record<string, string> = {
+  "code-xml": "/services/software-dev.png",
+  smartphone: "/services/mobile-app.png",
+  "brain-circuit": "/services/ai-automation.png",
+  "briefcase-business": "/services/software-dev.png",
+  "globe-2": "/services/software-dev.png",
+};
