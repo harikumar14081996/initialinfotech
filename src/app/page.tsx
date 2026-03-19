@@ -100,7 +100,7 @@ export default async function HomePage() {
           </div>
           <div className="flex w-full max-w-[280px] shrink-0 items-center justify-center rounded-[1.5rem] border border-[var(--color-line)] bg-white p-8 shadow-sm md:w-auto">
             <Image
-              src="/utu-logo.png"
+              src="/utu-logo.jpg"
               alt="Uka Tarsadia University Logo"
               width={180}
               height={180}
